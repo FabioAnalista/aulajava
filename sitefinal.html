@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Primeira Página</title>
+    <!-- Vincula o arquivo CSS externo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header >
+ <button id="tema"><img src="img/tema.svg"></button>
+        <h1>Bem-vindo ao meu site</h1>
+          <!-- Botão do Menu Hambúrguer -->
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="menu"id="menu">
+            <ul>
+                
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Habilidades</a></li>
+                <li><a href="#">Projetos</a></li>
+                <li><a href="#">Contatos</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+   
+
+    
+    <div class="search-container">
+        <input type="text" placeholder="Pesquisar...">
+        <button type="submit">
+            <img src="img/lupa.svg" alt="Buscar">
+        </button>
+        
+        </div>
+     
+
+    <main>
+        <section class="container">
+            <h2>Sobre Mim:</h2>
+            <p> Me chamo Fábio, gosto de tecnologia e estou buscando uma nova profissão, e estou iniciando como analista de sistemas.A minha meta é dominar várias linguagens de programação, para ter um 
+conhecimento amplo e poder atuar em diversas áreas da tecnologia.
+            </p> 
+        </section>
+
+        <section class="skills-container">
+            <h2>Habilidades:</h2>
+            <div class="progress">
+    <div class="progress-bar"></div>
+</div>
+            <div class="skilll">
+                <div class="skill-info">
+                    <span>HTML</span>
+                    <span class="percent">40%</span>
+                </div>
+                <div class="bar">
+                    <div class="fill" style="width: 40%;"></div>
+                </div>
+            </div>
+            <div class="skill">
+                <div class="skill-info">
+                    <span>CSS</span>
+                    <span class="percent">25%</span>
+                </div>
+                <div class="bar">
+                    <div class="fill" style="width: 25%;"></div>
+                </div>
+            </div>
+            <div class="skill">
+                <div class="skill-info">
+                    <span>Java</span>
+                    <span class="percent">15%</span>
+                </div>
+                <div class="bar">
+                    <div class="fill" style="width: 15%;"></div>
+                </div>
+
+            <h2> Projetos:</h2>
+            <p>Este é o meu <strong>primeiro</strong> projeto criado com HTML e CSS de muitos outros. A cada projeto concluído, o cursor irá se mover.</p>
+             <p><strong>Para ver outras páginas criadas.</strong> </p>
+            
+            <div class="button">
+            <button>Clique aqui</button> 
+            </div>
+            
+            <div class="skill">
+                <div class="skill-info">
+                    <span>HTML</span>
+                    <span class="percent">1%</span>
+                </div>
+                <div class="bar">
+                    <div class="fill" style="width: 1%;"></div>
+                </div>
+            </div>
+            <div class="skill">
+                <div class="skill-info">
+                    <span>CSS</span>
+                    <span class="percent">1%</span>
+                </div>
+                <div class="bar">
+                    <div class="fill" style="width: 1%;"></div>
+                </div>
+            </div>
+            <div class="skill">
+                <div class="skill-info">
+                    <span>JavaScript</span>
+                    <span class="percent">1%</span>
+                </div>
+                <div class="bar">
+                    <div class="fill" style="width: 1%;"></div>
+                </div>
+            </div>
+            <div class="skill">
+                <div class="skill-info">
+                    <span>PHP</span>
+                    <span class="percent">0%</span>
+                </div>
+                <div class="bar">
+                    <div class="fill" style="width: 0%;"></div>
+                
+            </div>
+        </section>
+
+        
+    </main>
+     
+    <footer>
+    <div class="footer-content">
+        <p>© 2026 Meu Site. Todos os direitos reservados.</p>
+        <ul class="social-links">
+            <li><a href="#">Contato</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">GitHub</a></li>
+        </ul>
+    </div>
+</footer>
+<script>
+    const btnTema = document.getElementById('tema');
+    const temaSalvo = localStorage.getItem('theme');
+
+    // Ao carregar a página, confere se o usuário já preferia o modo escuro
+    if (temaSalvo === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+
+    // Gerencia a alternância de tema no clique
+    btnTema.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        
+        // Define o estado atual para guardar no cache do navegador
+        let novoTema = 'light';
+        if (document.body.classList.contains('dark-mode')) {
+            novoTema = 'dark';
+        }
+        localStorage.setItem('theme', novoTema);
+    });
+
+    // Código bônus: Mantém o funcionamento do seu botão do menu hambúrguer integrado
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('ativo');
+            menu.classList.toggle('ativo');
+        });
+    }
+</script>
+
+</script>
+ <script>
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const box = entry.target;
+              const bar = box.querySelector('.skill-per');
+              const text = box.querySelector('.percent-text');
+              const targetValue = parseInt(bar.getAttribute('data-per'));
+              
+              // Anima a barra de progresso (CSS)
+              bar.style.width = targetValue + '%';
+              
+              // Anima o texto numérico (JavaScript)
+              let count = 0;
+              const duration = 1500; // Mesmo tempo do transition do CSS (1.5s)
+              const stepTime = Math.abs(Math.floor(duration / targetValue));
+              
+              const timer = setInterval(() => {
+                count++;
+                text.innerText = count + '%';
+                if (count >= targetValue) {
+                  clearInterval(timer);
+                }
+              }, stepTime);
+              
+              observer.unobserve(box); // Executa a animação apenas uma vez
+            }
+          });
+        });
+
+        // Seleciona a caixa de habilidade para observar
+        document.querySelectorAll('.skill-box').forEach(box => {
+  observer.observe(box);
+});
+</script>
+
+</body>
+</html>

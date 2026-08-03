@@ -1,18 +1,18 @@
-import java.util.Scanner;
+const btn = document.getElementById('tema');
+const body = document.body;
 
-public class NumerosPares {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Digite um número inteiro: ");
-        int limite = scanner.nextInt();
-
-        System.out.println("Números pares entre 1 e " + limite + ":");
-        for (int i = 1; i <= limite; i++) {
-            if (i % 2 == 0) {
-                System.out.println(i);
-            }
-        }
-        scanner.close();
-    }
+// Verifica se o usuário já tinha um tema salvo
+if (localStorage.getItem('tema') === 'dark') {
+    body.classList.add('dark-mode');
 }
+
+btn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    
+    // Salva a preferência no localStorage
+    if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('tema', 'dark');
+    } else {
+        localStorage.setItem('tema', 'light');
+    }
+});
